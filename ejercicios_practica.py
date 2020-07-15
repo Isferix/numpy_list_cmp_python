@@ -16,6 +16,8 @@ __email__ = "alumnos@inove.com.ar"
 __version__ = "1.1"
 
 import numpy as np
+import math
+import random
 
 
 def ej1():
@@ -41,6 +43,12 @@ def ej1():
 
     Realizar este proceso iterativo hasta cumplir el objetivo
     '''
+    while True:
+        lista_aleatoria = [random.randint(1, 30) for x in range(3)]
+        suma = sum(lista_aleatoria)
+        if suma <= 21:
+            print("Lista aleatoria generada: {}\n Suma total: {}".format(lista_aleatoria, suma))
+            break
 
 
 def ej2():
@@ -51,7 +59,7 @@ def ej2():
     obtener una nueva lista filtrada que llamaremos "nombres_filtrados"
     La lista se debe filtrar por comprensión de listas utilizando la
     lista "padron" como parámetro.
-    La lista filtrada sodo deberá tener aquellos nombres que empiecen
+    La lista filtrada solo deberá tener aquellos nombres que empiecen
     con alguna de las letras aceptadas en el "padron".
     '''
 
@@ -63,6 +71,8 @@ def ej2():
 
     # Se espera obtener:
     # ['Tamara', 'Juan', 'Alberto'......]
+    lista_filtrada = [nombre for nombre in nombres if nombre[0] in padron]
+    print(lista_filtrada)
 
 
 def ej3():
@@ -75,22 +85,22 @@ def ej3():
     # Conjunto de valores "X" en un array
     x = np.arange(0, 2*np.pi, 0.1)
 
+
     # Utilizar la función np.sin para someter cada valor de "X",
     # obtenga el array "y_nump" que tenga los resultados
     # NO utilizar comprensión de listas, solo utilice la
     # funcion de numpy "np.sin"
 
     # y_nump =
-
+    y_nump = np.sin(x)
     # Conjunto de valores "X" en una lista
     x = list(np.arange(0, 2*np.pi, 0.1))
-
     # Utilizar comprensión de listas para obtener la lista
     # "y_list" que tenga todos los valores obtenidos como resultado
     # de someter cada valor de "X" a la función math.sin
 
     # y_list =
-
+    y_list = [math.sin(valor) for valor in x]
     # Este es un ejemplo práctico de cuando es útil usar numpy,
     # basicamente siempre que deseen utilizar una función matemática
     # que esté definida en numpy NO necesitaran un bucle o comprensión
@@ -111,7 +121,7 @@ def ej4():
                 905045: 'Computadora',
                 }
 
-    lista_compra_id = [556070, 905045, 42135, 5674, 704060, 1264, 42135, 3654]
+    lista_compra_id = [556070, 905045, 42135, 5674, 704060, 1264, 42135, 3654, 12345, 2334]
 
     # Crear una nueva lista "lista_compra_productos" que transforme la lista
     # de realizada por "ID" de producto en lista por "nombre" producto
@@ -123,6 +133,7 @@ def ej4():
     # de condicionales PERO recomendamos leer atentamente el método "get"
     # de diccionarios que tiene un parametro configurable respecto
     # que sucede sino encuentra la "key" en el diccionario.
+    lista_compra_productos = [producto.get(codigo, 'Nan') for codigo in lista_compra_id]
 
 
 def ej5():
@@ -147,6 +158,66 @@ def ej5():
     dos jugadores y compitan para ver quien sacá la suma de números
     más cercanos a 21 sin pasarse!
     '''
+    cambiar_turno = lambda x: 1 if x == 0 else 0
+    turno = 0
+    total_1 = 0
+    total_2 = 0
+
+    print('Juguemos Black Jack!!!')
+    while True:
+
+        if turno == 0:
+            input('Empieza el jugador 1... presione enter para continuar')
+            while True:
+                print('Tirando cartas...')
+            
+                jugador_1 = [random.randint(1, 10) for x in range(2)]
+                total_1 += sum(jugador_1)
+
+                for i in jugador_1:
+                    print(i, '', end='')
+                print('\n', total_1, sep='')
+
+                eleccion = input('Desea tirar de vuelta las cartas?\n')
+                if eleccion == 'Si' and total_1 < 21:
+                    continue
+                else:
+                    cambiar_turno(turno)
+                    break
+
+                
+        else:
+            input('Es el turno del segundo jugador... presione enter para continuar')
+            while True:
+                print('Tirando cartas...')
+            
+                jugador_2 = [random.randint(1, 10) for x in range(2)]
+                total_2 += sum(jugador_2)
+
+                for i in jugador_2:
+                    print(i, '', end='')
+                print('\n', total_2, sep='')
+
+                eleccion = input('Desea tirar de vuelta las cartas?')
+                if eleccion == 'Si' or total_2 > 21:
+                    continue
+                else:
+                    cambiar_turno(turno)
+                    break
+
+            if (abs(21 - total_1)) < (abs(21 - total_2)):
+                print('GANA EL JUGADOR 1')
+            elif (abs(21 - total_1)) > (abs(21 - total_2)):
+                print('GANA EL JUGADOR 2')
+            else:
+                print('EMPATE')
+        
+        repeticion = input('Desean volver a jugar?')
+        if repeticion == 'Si':
+            continue
+        else:
+            break
+
 
 
 if __name__ == '__main__':

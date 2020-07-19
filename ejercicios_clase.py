@@ -114,7 +114,13 @@ def ej4():
 
     # lista_numeros_int = [.....]
     lista_numeros_int = [int(x) if(x.isnumeric()) == True else 0 for x in lista_numeros_str]
+    # Inovetip: Para que no te queden tan largo podes hacer así:
+    # lista_numeros_int = [int(x) if(x.isnumeric()) ==
+    #                     True else 0 for x in lista_numeros_str]
     print(lista_numeros_int)
+    # Inovetip: El -2 no te lo toma porque el caracter "-" te lo impide, al
+    # igual que si hubieras utilizado .isdigit(), podrías utilizar el método
+    # lstrip('-') como vimos en clase: x.lstrip('-+').isdigit() == True
 
 
 def ej5():
@@ -152,6 +158,11 @@ def ej5():
     # personal_valido = [.....]
     personal_valido = [x for x in [x for x in accesos if x <= 10] if x in id_validos]
     print('Del personal que ha pasado por el molinete {} personas no tienen acceso'.format(len(personal_valido)))
+    # inovetip: Fijate que lo estas filtrando por <=10, el 15 te está 
+    # quedando fuera, por otra parte, podes realizarlo en un solo bucle, 
+    # no hace falta que uses 2 anidados :D
+    # personal_valido =  [personal for personal in accesos if personal in id_validos]
+    # print(personal_valido)
 
 
 def ej6():
@@ -160,6 +171,7 @@ def ej6():
     # el cual este acotado entre 0 y 1000
     # De dicho array calcular las siguientes operaciones:
     array = np.arange(1000)
+    # Inovetip: 1001 para tener el 1000 inclusive :D
     
     # 1)
     # Calcular la suma de todos los elementos en el array

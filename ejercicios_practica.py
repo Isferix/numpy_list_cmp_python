@@ -49,6 +49,10 @@ def ej1():
         if suma <= 21:
             print("Lista aleatoria generada: {}\n Suma total: {}".format(lista_aleatoria, suma))
             break
+        # Inovetip: Usaste todo bien, pero te confundiste en el enunciado
+        # El break se produce cuando la suma es menor igual a 21, 
+        # y debe ser MAYOR a 21. Sin embargo, debe imprimirse si es
+        # menor igual a 21.
 
 
 def ej2():
@@ -179,10 +183,16 @@ def ej5():
                 print('\n', total_1, sep='')
 
                 eleccion = input('Desea tirar de vuelta las cartas?\n')
+                # Inovetip: Tenes que indicar por consola que 
+                # tengo que poner para volver a jugar, el usuario no
+                # conoce el juego !
                 if eleccion == 'Si' and total_1 < 21:
                     continue
                 else:
                     cambiar_turno(turno)
+                    # Te recomiendo usar turno = not turno, es mas barato y efectivo.
+                    # Para ello la variable turno tendría que ser booleana, 
+                    # Inicializala como turno = False
                     break
 
                 
@@ -200,6 +210,7 @@ def ej5():
 
                 eleccion = input('Desea tirar de vuelta las cartas?')
                 if eleccion == 'Si' or total_2 > 21:
+                    # Inovetip: Aquí tendría que ser  "and total_2 < 21"
                     continue
                 else:
                     cambiar_turno(turno)
